@@ -1,5 +1,5 @@
 """Files tests simple file read related operations"""
-
+from __future__ import division
 class SimpleFile(object):
     """SimpleFile tests using file read api to do some simple math"""
     def __init__(self, file_path):
