@@ -20,8 +20,7 @@ class SimpleFile(object):
         meanofnum = 0
         for number in self.numbers[line_number]:
             meanofnum += number
-        meanofnum = meanofnum/len(self.numbers[line_number])
-        return meanofnum
+        return meanofnum/len(self.numbers[line_number])
 
     def get_max(self, line_number):
         """
