@@ -17,10 +17,7 @@ class SimpleFile(object):
         get_mean retrieves the mean value of the list by line_number (starts
         with zero)
         """
-        meanofnum = 0
-        for number in self.numbers[line_number]:
-            meanofnum += number
-        return meanofnum/len(self.numbers[line_number])
+        return sum(self.numbers[line_number])/len(self.numbers[line_number])
 
     def get_max(self, line_number):
         """
