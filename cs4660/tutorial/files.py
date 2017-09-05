@@ -8,31 +8,44 @@ class SimpleFile(object):
         TODO: reads the file by path and parse content into two
         dimension array (numbers)
         """
-
+        f = open(file_path)
+        for line in f:
+            self.numbers.append(list(map(int,line.split(" "))))
+        
     def get_mean(self, line_number):
         """
         get_mean retrieves the mean value of the list by line_number (starts
         with zero)
         """
-        pass
+        meanofnum = 0
+        for number in self.numbers[line_number]:
+            meanofnum += number
+        meanofnum = meanofnum/len(self.numbers[line_number])
+        return meanofnum
 
     def get_max(self, line_number):
         """
         get_max retrieves the maximum value of the list by line_number (starts
         with zero)
         """
-        pass
+        for number in self.numbers[line_number]:
+            return(max(self.numbers[line_number]))
 
     def get_min(self, line_number):
         """
         get_min retrieves the minimum value of the list by line_number (starts
         with zero)
         """
-        pass
+        minnum = 0
+        for number in self.numbers[line_number]:
+            return(min(self.numbers[line_number]))
 
     def get_sum(self, line_number):
         """
         get_sum retrieves the sumation of the list by line_number (starts with
         zero)
         """
-        pass
+        sumofnum = 0
+        for number in self.numbers[line_number]:
+            sumofnum += number
+        return sumofnum
