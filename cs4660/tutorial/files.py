@@ -8,6 +8,11 @@ class SimpleFile(object):
         TODO: reads the file by path and parse content into two
         dimension array (numbers)
         """
+
+        f = open(file_path)
+        for line in f:
+            self.numbers.append(list(map(int,line.split(" "))))
+
         f = open(file_path)
         for line in f:
             self.numbers.append(list(map(int,line.split(" "))))
@@ -44,4 +49,5 @@ class SimpleFile(object):
         sumofnum = 0
         for number in self.numbers[line_number]:
             sumofnum += number
+            
         return sumofnum
