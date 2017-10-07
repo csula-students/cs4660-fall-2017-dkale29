@@ -13,6 +13,10 @@ class SimpleFile(object):
         for line in f:
             self.numbers.append(list(map(int,line.split(" "))))
 
+        f = open(file_path)
+        for line in f:
+            self.numbers.append(list(map(int,line.split(" "))))
+        
     def get_mean(self, line_number):
         """
         get_mean retrieves the mean value of the list by line_number (starts
@@ -45,4 +49,5 @@ class SimpleFile(object):
         sumofnum = 0
         for number in self.numbers[line_number]:
             sumofnum += number
+            
         return sumofnum
