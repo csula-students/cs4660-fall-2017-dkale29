@@ -52,6 +52,7 @@ def __json_request(target_url, body):
 
 if __name__ == "__main__":
     # Your code starts here
+    '''
     empty_room = get_state('7f3dc077574c013d98b2de8f735058b4')
     print(empty_room)
     print(transition_state(empty_room['id'], empty_room['neighbors'][0]['id']))
@@ -60,7 +61,59 @@ if __name__ == "__main__":
     dark_room = get_state('f1f131f647621a4be7c71292e79613f9')
     print(dark_room)
     print(transition_state(empty_room['id'], empty_room['neighbors'][0]['id']))
-'''
+    '''
+    result = bfs('7f3dc077574c013d98b2de8f735058b4','f1f131f647621a4be7c71292e79613f9')
 def bfs(initial, dest)
-'''
+    
+    queue = []
 
+    distance = [initial] = 0
+
+    while (!queue.isEmpty()):
+        u = queue.dequeue()
+
+        for i in range(len(neighbors))
+            neigh = neighbors[i]
+            if()
+
+    return result
+'''
+function BFS(v) {
+    for (node in G) {
+        node.distance = Number.MAX_VALUE;
+        node.parent = null;
+    }
+
+    // create empty queue Q
+    var queue = new Queue();
+    // Best first search - use priority queue (lowest number goes first)
+    var result = [];
+    var endTile = null;
+
+    v.distance = 0;
+    queue.enqueue(v);
+
+    while (!queue.isEmpty()) {
+        var u = queue.dequeue();
+
+        for (node in Graph.neighbors(u)) {
+            if (node.distance == Number.MAX_VALUE) {
+                node.distance = u.distance + edge.value
+                // note that I'm leaving edge value up to
+                // you to implement
+                node.parent = u;
+                if (Graph.isGoal(node)) {
+                  endTile = u;
+                }
+                queue.enqueue(node);
+            }
+        }
+    }
+    // back trace from goal to start
+    while (endTile.parent != null) {
+      result.add(Edge(endTile.parent, endTile));
+      endTile = endTile.parent;
+    }
+    // remember to reverse the result before return
+    return result.reverse();
+}'''
