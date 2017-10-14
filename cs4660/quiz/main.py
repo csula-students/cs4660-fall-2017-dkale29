@@ -55,3 +55,12 @@ if __name__ == "__main__":
     empty_room = get_state('7f3dc077574c013d98b2de8f735058b4')
     print(empty_room)
     print(transition_state(empty_room['id'], empty_room['neighbors'][0]['id']))
+
+
+    dark_room = get_state('f1f131f647621a4be7c71292e79613f9')
+    print(dark_room)
+    print(transition_state(empty_room['id'], empty_room['neighbors'][0]['id']))
+'''
+def bfs(initial, dest)
+'''
+
