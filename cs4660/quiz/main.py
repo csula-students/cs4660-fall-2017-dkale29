@@ -8,9 +8,7 @@ TODO: implement Dijkstra utilizing the path with highest effect number
 """
 
 import json
-import codecs
 
-# http lib import for Python 2 and 3: alternative 4
 try:
     from urllib.request import urlopen, Request
 except ImportError:
@@ -44,9 +42,8 @@ def __json_request(target_url, body):
     jsondata = json.dumps(body)
     jsondataasbytes = jsondata.encode('utf-8')   # needs to be bytes
     req.add_header('Content-Length', len(jsondataasbytes))
-    response = urlopen(req, jsondataasbytes)
-    reader = codecs.getreader('utf-8')
-    return json.load(reader(response))
+    response = json.load(urlopen(req, jsondataasbytes))
+    return response
 
 def bfs(init_id, dest_id):
     distance = {}
@@ -94,17 +91,17 @@ def dijkstra(init_id, dest_id):
         visited.append(u['id'])
         neighbors = u['neighbors']
         for i in range(len(neighbors)):
-            v = neighbors[i]
-            edge = transition_state(u['id'], v['id'])
+            neigh = neighbors[i]
+            edge = transition_state(u['id'], neigh['id'])
             alt = distance[u['id']] + edge['event']['effect']
-            if v['id'] not in visited and (v['id'] not in distance or alt > distance[v['id']]):
-                if v['id'] in distance:
-                    queue.remove((distance[v['id']], v['id']))
-                queue.append((alt, v['id']))
+            if neigh['id'] not in visited and (neigh['id'] not in distance or alt > distance[neigh['id']]):
+                if neigh['id'] in distance:
+                    queue.remove((distance[neigh['id']], neigh['id']))
+                queue.append((alt, neigh['id']))
 
-                distance[v['id']] = alt
-                parent[v['id']] = u['id']
-                edge_to[v['id']] = edge
+                distance[neigh['id']] = alt
+                parent[neigh['id']] = u['id']
+                edge_to[neigh['id']] = edge
         queue = sorted(queue, key=lambda x:x[0]) 
 
     while node_id in parent:
