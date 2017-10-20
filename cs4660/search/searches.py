@@ -131,9 +131,9 @@ def a_star_search(graph, initial_node, dest_node):
                 edge = graph.distance(i, node)
                 g_scoretemp = g_score[i] + edge.weight
                 if node not in g_score:
-                    not_visit.append((float('val'), node))
-                    g_score[node] = float('val')
-                    f_score[node] = float('val') 
+                    not_visit.append((float('inf'), node))
+                    g_score[node] = float('inf')
+                    f_score[node] = float('inf') 
                 if g_scoretemp < g_score[node]:
                     not_visit.remove((f_score[node], node))
                     parent[node] = i
