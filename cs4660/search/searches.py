@@ -128,8 +128,8 @@ def a_star_search(graph, initial_node, dest_node):
 
         for node in graph.neighbors(i):
             if node not in visit:
-                edge = graph.distance(i, node)
-                g_scoretemp = g_score[i] + edge.weight
+                edgetemp = graph.distance(i, node)
+                g_scoretemp = g_score[i] + edgetemp.weight
                 if node not in g_score:
                     not_visit.append((float('inf'), node))
                     g_score[node] = float('inf')
@@ -137,7 +137,7 @@ def a_star_search(graph, initial_node, dest_node):
                 if g_scoretemp < g_score[node]:
                     not_visit.remove((f_score[node], node))
                     parent[node] = i
-                    edge[node] = edge
+                    edge[node] = edgetemp
                     g_score[node] = g_scoretemp
                     f_scoretemp = g_scoretemp + heuristic(node, dest_node)
                     f_score[node] = f_scoretemp
