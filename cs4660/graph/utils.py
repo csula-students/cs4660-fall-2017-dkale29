@@ -36,49 +36,46 @@ def parse_grid_file(graph, file_path):
     """
     ParseGridFile parses the grid file implementation from the file path line
     by line and construct the nodes & edges to be added to graph
-
     Returns graph object
     """
-    # TODO: read the filepath line by line to construct nodes & edges
+    # TODO: read the filepaht line by line to construct nodes & edges
 
     # TODO: for each node/edge above, add it to graph
 
-    file = open(file_path)
+    f = open(file_path, encoding='utf-8')
+    content = f.readlines()
+    last_row = []
+    # ignore the top and bottom bounding lines
+    rows = len(content)-2
+    for j in range(rows):
+        line = content[j+1]
+        i = 1
+        current_row = []
+        while i < len(line)-3:
+            k = int((i-1)/2)
+            node = Node(Tile(k, j, line[i:i+2]))
+            graph.add_node(node)
+            i+=2
+            
+            if node.data.symbol != "##":
 
-    file_list = []
-    for f in file:
-        if f.strip() != '':
-            list.append(list(f.strip())) 
+                if node.data.x > 0:
+                    last_node = current_row[-1]
+                    if last_node.data.symbol != "##":
+                        graph.add_edge(Edge(last_node, node, 1))
+                        graph.add_edge(Edge(node, last_node, 1))
 
-    file.close()
+                if node.data.y > 0:
+                    last_node = last_row[k]
+                    if last_node.data.symbol != "##":
+                        graph.add_edge(Edge(last_node, node, 1))
+                        graph.add_edge(Edge(node, last_node, 1))
 
-    grid = []
-    row_num = len(file_list)
+            current_row.append(node)
 
-    if row_num > 0:
-        for i in range(1, row_num - 1):
-            y = i - 1
-            col = len(file_list[i])
-            if col > 2:
-                grid.append([])
-                for j in range(1, col - 1, 2):
-                    x = int((j - 1)/2)
-                    tile = file_list[i][j] + file_list[i][j + 1]
-                    if not tile.__eq__('##'):
-                        grid[y].append(Node(Tile(x, y, str(tile))))
-                    else:
-                        grid[y].append(None)
+        last_row = current_row
 
-        for x in range(0, len(grid)):
-            for y in range(0 , len(grid[x])):
-                if node_grid[x][y] is not None:
-                    graph.add_node(grid[x][y])
-                    if x > 0 and grid[x - 1][y] is not None:
-                        graph.add_edge(Edge(grid[x - 1][y], grid[x][y], 1))
-                        graph.add_edge(Edge(grid[x][y], grid[x - 1][y], 1))
-                    if y > 0 and grid[x][y - 1] is not None:
-                        graph.add_edge(Edge(grid[x][y - 1], grid[x][y], 1))
-                        graph.add_edge(Edge(grid[x][y], grid[x][y - 1], 1))
+    f.close()
     return graph
 
 def convert_edge_to_grid_actions(edges):
