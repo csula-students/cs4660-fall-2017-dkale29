@@ -155,11 +155,13 @@ class AdjacencyMatrix(object):
         self.nodes = []
 
     def adjacent(self, node_1, node_2):
-        for edge in self.adjacency_matrix[self.__get_node_index(node_1)]:
-            if edge.to_node == node_2:
-                return True
-        else:
+        if node_1 not in self.nodes or node_2 not in self.nodes:
             return False
+        index1 = self.__get_node_index(node_1)
+        index2 = self.__get_node_index(node_2)
+        if self.adjacency_matrix[index1][index2] is not None:
+            return True
+        return False
 
     def neighbors(self, node):
         nb = []
@@ -222,14 +224,14 @@ class AdjacencyMatrix(object):
         self.adjacency_matrix[index1][index2] = None
         return True
 
+    def __get_node_index(self, node):
+        """helper method to find node index"""
+        return self.nodes.index(node)
+
     def distance(self, node_1, node_2):
         index1 = self.__get_node_index(node_1)
         index2 = self.__get_node_index(node_2)
         return Edge(node_1, node_2, self.adjacency_matrix[index1][index2])
-
-    def __get_node_index(self, node):
-        """helper method to find node index"""
-        return self.nodes.index(node)
 
 class ObjectOriented(object):
     """ObjectOriented defines the edges and nodes as both list"""
