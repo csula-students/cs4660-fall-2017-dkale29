@@ -130,6 +130,10 @@ def a_star_search(graph, initial_node, dest_node):
             if node not in visit:
                 edge = graph.distance(i, node)
                 g_scoretemp = g_score[i] + edge.weight
+                if node not in g_score:
+                    not_visit.append((float('val'), node))
+                    g_score[node] = float('val')
+                    f_score[node] = float('val') 
                 if g_scoretemp < g_score[node]:
                     not_visit.remove((f_score[node], node))
                     parent[node] = i
@@ -138,10 +142,7 @@ def a_star_search(graph, initial_node, dest_node):
                     f_scoretemp = g_scoretemp + heuristic(node, dest_node)
                     f_score[node] = f_scoretemp
                     not_visit.append((f_score[node], node))
-                if node not in g_score:
-                    not_visit.append((float('val'), node))
-                    g_score[node] = float('val')
-                    f_score[node] = float('val')                
+               
         not_visit = sorted(not_visit, key=lambda x:x[0])
         not_visit.reverse()
     return []
